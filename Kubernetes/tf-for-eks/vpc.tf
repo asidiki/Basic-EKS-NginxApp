@@ -13,16 +13,16 @@ module "nginxapp-vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    "kubernetes.io/cluster/myjenkins-server-eks-cluster" = "shared"
+    "kubernetes.io/cluster/nginxapp-eks-cluster" = "shared"
   }
 
   public_subnet_tags = {
-    "kubernetes.io/cluster/myjenkins-server-eks-cluster" = "shared"
+    "kubernetes.io/cluster/nginxapp-eks-cluster" = "shared"
     "kubernetes.io/role/elb"                  = 1
   }
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/myjenkins-server-eks-cluster" = "shared"
+    "kubernetes.io/cluster/nginxapp-eks-cluster" = "shared"
     "kubernetes.io/role/internal-elb"         = 1
   }
 }
