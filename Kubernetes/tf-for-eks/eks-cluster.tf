@@ -7,8 +7,8 @@ module "eks" {
 
     cluster_endpoint_public_access  = true
 
-    vpc_id = module.myjenkins-server-vpc.vpc_id
-    subnet_ids = module.myjenkins-server-vpc.private_subnets
+    vpc_id = module.nginxapp-vpc.vpc_id
+    subnet_ids = module.nginxapp-vpc.private_subnets
 
     tags = {
         environment = "development"
