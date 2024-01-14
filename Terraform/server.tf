@@ -3,7 +3,7 @@ data "aws_ami" "latest-amazon-linux-image" {
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["Amazon Linux 2023 AMI"]
+    values = ["al2023-ami-*-kernel-*-x86_64"]
   }
   filter {
     name   = "virtualization-type"
@@ -19,7 +19,7 @@ resource "aws_instance" "myjenkins-server" {
   vpc_security_group_ids      = [aws_default_security_group.default-sg.id]
   availability_zone           = var.availability_zone
   associate_public_ip_address = true
-  user_data                   = "${file("jenkins-server-setup.sh")}"
+  user_data                   = "${file("jenkins-setup.sh")}"
   tags = {
     Name = "${var.env_prefix}-server"
   }
