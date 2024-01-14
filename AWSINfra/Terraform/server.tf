@@ -3,7 +3,7 @@ data "aws_ami" "latest-amazon-linux-image" {
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["al2023-ami-*-kernel-*-x86_64"]
+    values = ["amzn2-ami-kernel-*-hvm-*-x86_64-gp2"]
   }
   filter {
     name   = "virtualization-type"
