@@ -1,6 +1,6 @@
 #vpc.tf
 data "aws_availability_zones" "azs" {}
-module "nginxapp-vpc" {
+module "dev-vpc" {
   source          = "terraform-aws-modules/vpc/aws"
   name            = "dev-vpc"
   cidr            = var.vpc_cidr_block
