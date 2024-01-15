@@ -6,14 +6,23 @@ pipeline {
         AWS_DEFAULT_REGION = "us-east-1"
     }
     stages {
+        stage("Intsall eksctl") {
+            steps {
+                script {
+                    // #Give the location of terraform scripts directory relative 
+                    // #to the repo
+                        sh "curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp"
+                        sh "sudo mv /tmp/eksctl /usr/local/bin"
+                    }
+                }
+            }
         stage("Create an EKS Cluster") {
             steps {
                 script {
                     // #Give the location of terraform scripts directory relative 
                     // #to the repo
-                    dir('Kubernetes/tf-for-eks') {
-                        sh "terraform init"
-                        sh "terraform apply -auto-approve"
+                    dir('Kubernetes/eksctl_config') {
+                        sh "eksctl create cluster --config-file ./cluster_config.yaml"
                     }
                 }
             }
@@ -24,7 +33,7 @@ pipeline {
                     // #Give the location of kubernetes scripts directory relative 
                     // #to the repo
                     dir('Kubernetes/k8s-config') {
-                        sh "aws eks update-kubeconfig --name nginxapp-eks-cluster"
+                        sh "aws eks update-kubeconfig --name nginxapp-cluster"
                         sh "kubectl apply -f deployment.yaml"
                         sh "kubectl apply -f service.yaml"
                     }
