@@ -15,13 +15,12 @@ resource "aws_instance" "myjenkins-server" {
   ami                         = data.aws_ami.latest-amazon-linux-image.id
   instance_type               = var.instance_type
   key_name                    = "nginxapp"
-  subnet_id                   = aws_subnet.myjenkins-server-subnet-1.id
-  vpc_security_group_ids      = [aws_default_security_group.default-sg.id]
-  availability_zone           = var.availability_zone
+  subnet_id                   = aws_subnet.public_subnet[0].id
+  vpc_security_group_ids      = [aws_security_group.default.id]
   associate_public_ip_address = true
   user_data                   = "${file("jenkins-setup.sh")}"
   tags = {
-    Name = "${var.env_prefix}-server"
+    Name = "${var.environment}-server"
   }
 }
 

@@ -1,21 +1,26 @@
 #variables.tf
-variable "vpc_cidr_block" {
+variable "vpc_cidr" {
  type = string
  description = "CIDR block for VPC"
 }
-variable "subnet_cidr_block" {
- type = string
- description = "CIDR block for subnet"
-}
-variable "availability_zone" {
- type = string
- description = "AWS availability zone"
-}
-variable "env_prefix" {
+variable "environment" {
  type = string
  description = "Dev or Prod"
 }
 variable "instance_type" {
  type = string
  description = "Instance type for Ec2"
+}
+variable "private_subnets_cidr_blocks" {
+ type = list(string)
+}
+variable "public_subnets_cidr_blocks" {
+ type = list(string)
+}
+variable "region" {
+  description = "AWS Deployment region.."
+  default = "us-east-1"
+}
+variable "availability_zones" {
+  description = "AZs"
 }
