@@ -46,7 +46,7 @@ resource "aws_subnet" "public_subnet" {
   tags = {
     Name                                                  = "${var.environment}-${element(var.availability_zones, count.index)}-      public-subnet"
     Environment                                           = "${var.environment}"
-    "kubernetes.io/cluster/nginxapp-eks-cluster"          = "shared"
+    "kubernetes.io/cluster/nginxapp-cluster"          = "shared"
     "kubernetes.io/role/elb"                              = 1
   }
 }
@@ -60,7 +60,7 @@ resource "aws_subnet" "private_subnet" {
   tags = {
     Name                                                  = "${var.environment}-${element(var.availability_zones, count.index)}-private-subnet"
     Environment                                           = "${var.environment}"
-    "kubernetes.io/cluster/nginxapp-eks-cluster"          = "shared"
+    "kubernetes.io/cluster/nginxapp-cluster"          = "shared"
     "kubernetes.io/role/internal-elb"                     = 1
   }
 }
